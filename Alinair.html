@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City of Tangub - Christmas Symbols Capital of the Philippines</title>
+    <style>
+        :root {
+            --primary: #005f73;
+            --secondary: #0a9396;
+            --accent: #ee9b00;
+            --light: #e9d8a6;
+            --dark: #001219;
+            --christmas-red: #c41e3a;
+            --christmas-green: #228b22;
+            --christmas-gold: #ffd700;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #a31d1d;
+            overflow-x: hidden;
+        }
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--christmas-red), var(--christmas-green));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: loginFadeIn 1s ease-in-out;
+        }
+        
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: loginSlideUp 1s ease-out;
+            backdrop-filter: blur(10px);
+        }
+        
+        .login-logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, var(--christmas-gold), var(--accent));
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            animation: logoSpin 2s ease-in-out infinite alternate;
+        }
+        
+        .login-box h2 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .login-box input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .login-box input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(238, 155, 0, 0.3);
+            outline: none;
+            transform: scale(1.02);
+        }
+        
+        .show-password {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .show-password input {
+            width: auto;
+            margin: 0 10px 0 0;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        #errorMsg {
+            color: var(--christmas-red);
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        .website-content {
+            display: none;
+            animation: contentFadeIn 1s ease-in-out;
+        }
+        
+        .website-content.show {
+            display: block;
+        }
+        nav {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            animation: navSlideDown 0.8s ease-out;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+        }        
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23228b22" width="1200" height="600"/><circle fill="%23ffd700" cx="200" cy="100" r="20"/><circle fill="%23ffd700" cx="400" cy="150" r="15"/><circle fill="%23ffd700" cx="600" cy="80" r="25"/><circle fill="%23ffd700" cx="800" cy="120" r="18"/><circle fill="%23ffd700" cx="1000" cy="180" r="22"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }       
+        .hero-content {
+            max-width: 800px;
+            animation: heroSlideUp 1.2s ease-out;
+        }       
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            animation: titleGlow 4s ease-in-out infinite alternate;
+        }        
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .christmas-lights {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: repeating-linear-gradient(90deg, 
+                var(--christmas-red) 0px, 
+                var(--christmas-red) 20px,
+                var(--christmas-green) 20px,
+                var(--christmas-green) 40px,
+                var(--christmas-gold) 40px,
+                var(--christmas-gold) 60px);
+            animation: lightsFlicker 2s linear infinite;
+        }
+        section {
+            padding: 4rem 0;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }       
+        section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            font-size: 2.5rem;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }        
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            border-radius: 2px;
+        }
+        #about {
+            background: linear-gradient(135deg, var(--light), #f0f8ff);
+        }       
+        .about-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: slideInLeft 1s ease-out;
+        }        
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            color: white;
+            border-radius: 15px;
+            animation: bounceIn 1s ease-out;
+        }       
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+        #barangays {
+            background: white;
+        }
+        
+        .barangay-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .barangay-card {
+            background: linear-gradient(135deg, white, #f8f9fa);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--accent);
+            animation: slideInUp 0.8s ease-out;
+        }
+        
+        .barangay-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .barangay-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .barangay-card .population {
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        #services {
+            background: linear-gradient(135deg, var(--light), #e6f3ff);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }        
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+        #news {
+            background: white;
+        }        
+      .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }       
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: slideInUp 0.8s ease-out;
+        }        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }      
+        .news-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--christmas-red), var(--christmas-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .news-content {
+            padding: 1.5rem;
+        }
+        
+        .news-date {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        #contact {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info, .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            animation: slideInUp 0.8s ease-out;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            transform: scale(1.02);
+        }
+        
+        .contact-form button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .contact-form button:hover {
+            background: var(--christmas-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        @keyframes loginFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes loginSlideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes logoSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes contentFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes navSlideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        @keyframes logoGlow {
+            from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+            to { text-shadow: 2px 2px 20px rgba(255,215,0,0.8); }
+        }
+        
+        @keyframes heroSlideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes titleGlow {
+            from { text-shadow: 3px 3px 6px rgba(0,0,0,0.7); }
+            to { text-shadow: 3px 3px 30px rgba(255,215,0,0.8); }
+        }
+        
+        @keyframes lightsFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes fadeInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            } 
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }           
+            .login-box {
+                padding: 2rem;
+                margin: 1rem;
+            }           
+            .barangay-grid,
+            .services-grid,
+            .news-grid {
+                grid-template-columns: 1fr;
+            }        
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="christmas-lights"></div>
+    <div id="loginSection" class="login-container">
+        <div class="login-box">
+            <div class="login-logo"></div>
+            <h2>Welcome to Tangub City</h2>
+            <input type="text" id="username" placeholder="Enter Username" required>
+            <input type="password" id="password" placeholder="Enter Password" required>
+            
+            <div class="show-password">
+                <input type="checkbox" id="showPassword">
+                <label for="showPassword">Show Password</label>
+            </div>
+            
+            <button class="login-btn" onclick="login()">Login</button>
+            <p id="errorMsg"></p>
+        </div>
+    </div>
+    <div id="websiteContent" class="website-content">
+        <nav>
+            <div class="nav-container">
+                <a href="#home" class="logo">City of Tangub</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#barangays">Barangays</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <section id="home">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>🎄Welcome to Tangub City🎄</h1>
+                    <p>The Christmas Symbols Capital of the Philippines</p>
+                    <p>Celebrating Natural Wonders and Cultural Heritage</p>
+                </div>
+            </div>
+        </section>
+        <section id="about">
+            <div class="container">
+                <h2>About Tangub City</h2>
+                <div class="about-content">
+                    <p>Tangub, officially the City of Tangub, is a component city in the province of Misamis Occidental, Philippines. According to the 2020 census, it has a population of 68,389 people. Tangub City is renowned as the "Christmas Symbols Capital of the Philippines" and is famous for its spectacular Christmas Festival of Lights.</p>
+                    
+                    <p>The city is strategically located where the Panguil Bay Bridge connects Mindanao's regions, making it a vital transportation hub. Tangub City is blessed with natural wonders, including pristine beaches, lush mountains, and rich cultural heritage that attracts visitors from around the world.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">68,389</span>
+                            <span>Population</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">55</span>
+                            <span>Barangays</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">7214</span>
+                            <span>ZIP Code</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">243m</span>
+                            <span>Elevation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="barangays">
+            <div class="container">
+                <h2>Barangays of Tangub City</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">Tangub City is composed of 55 barangays, each with its unique character and contribution to the city's vibrant community.</p>
+                
+                <div class="barangay-grid">
+                    <div class="barangay-card">
+                        <h3>Poblacion (Tangub)</h3>
+                        <p>The city center and commercial hub, home to the municipal government offices and main marketplace.</p>
+                        <span class="population">Urban Center</span>
+                    </div>
+                    <div class="barangay-card">
+                        <h3>Silanga</h3>
+                        <p>Known for its beautiful coastal areas and fishing communities, offering fresh seafood and scenic views.</p>
+                        <span class="population">Coastal</span>
+                    </div>
+                    <div class="barangay-card">
+                        <h3>Maloro</h3>
+                        <p>Agricultural barangay famous for its rice fields and farming communities that feed the city.</p>
+                        <span class="population">Agricultural</span>
+                    </div>
+                    <div class="barangay-card">
+                        <h3>Sumirap</h3>
+                        <p>Mountainous barangay with lush forests and hiking trails, perfect for eco-tourism activities.</p>
+                        <span class="population">Mountain</span>
+                    </div>
+                    <div class="barangay-card">
+                        <h3>Bintana</h3>
+                        <p>Residential area known for its peaceful environment and family-friendly community.</p>
+                        <span class="population">Residential</span>
+                    </div>
+                    <div class="barangay-card">
+                        <h3>Lorenzo</h3>
+                        <p>Historic barangay with cultural significance and traditional Filipino architecture.</p>
+                        <span class="population">Historic</span>
+                    </div>
+                    <div class="barangay-card">
+                        <h3>Mantic</h3>
+                        <p>Industrial area contributing to the city's economic development and job opportunities.</p>
+                        <span class="population">Industrial</span>
+                    </div>
+                    <div class="barangay-card">
+                        <h3>Aquino</h3>
+                        <p>Educational hub with schools and learning institutions serving the community.</p>
+                        <span class="population">Educational</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="services">
+            <div class="container">
+                <h2>Municipal Services</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">We provide comprehensive services to ensure our residents and visitors have access to quality public services.</p>               
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🎄</div>
+                        <h3>Christmas Festival</h3>
+                        <p>Annual Christmas Festival of Lights featuring spectacular displays, parades, and cultural performances.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🏛️</div>
+                        <h3>Government Services</h3>
+                        <p>Civil registry, permits and licenses, tax collection, and other essential government services.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🏥</div>
+                        <h3>Healthcare Services</h3>
+                        <p>Municipal health center, emergency services, and community health programs for all residents.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🚌</div>
+                        <h3>Transportation</h3>
+                        <p>Public transportation services and the historic Panguil Bay Bridge connecting regions.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>🏖️</h3>
+                        <h3>Tourism Services</h3>
+                        <p>Tourist information, guided tours, and accommodation assistance for visitors.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📚</div>
+                        <h3>Education</h3>
+                        <p>Public schools, libraries, and educational programs including Northwestern Mindanao State College.</p>
+                    </div>
+                </div>
+            </div>
+        </section>        
+        <section id="news">
+            <div class="container">
+                <h2>Latest News & Events</h2>               
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-image">🎄✨</div>
+                        <div class="news-content">
+                            <p class="news-date">December 1, 2024</p>
+                            <h3>Christmas Festival of Lights 2024: "Pasko sa Pamilya"</h3>
+                            <p>Tangub City officially launched its annual Christmas Festival of Lights at the City Plaza, featuring millions of LED lights, spectacular displays, and cultural performances celebrating the Christmas spirit.</p>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-image">🌉</div>
+                        <div class="news-content">
+                            <p class="news-date">November 15, 2024</p>
+                            <h3>Panguil Bay Bridge Enhances Connectivity</h3>
+                            <p>The Panguil Bay Bridge continues to significantly reduce travel time between Tangub City and neighboring regions, boosting economic development and tourism in the area.</p>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-image">🏆</div>
+                        <div class="news-content">
+                            <p class="news-date">October 30, 2024</p>
+                            <h3>Tangub City Wins Tourism Excellence Award</h3>
+                            <p>The city received recognition for its outstanding tourism initiatives and the successful promotion of local culture and heritage through the Christmas Festival.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact">
+            <div class="container">
+                <h2>Contact Us</h2>                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>🏛️ Municipal Office Information</h3>
+                        <p><strong>📍 Address:</strong> Tangub City Hall, Poblacion Ward, Tangub City, Misamis Occidental</p>
+                        <p><strong>📞 Phone:</strong> (088) 521-8234</p>
+                        <p><strong>📧 Email:</strong> tangubcity@gmail.com</p>
+                        <p><strong>🕐 Office Hours:</strong> Monday-Friday, 8:00 AM - 5:00 PM</p>                       
+                        <h3 style="margin-top: 2rem;">🚨 Emergency Contacts</h3>
+                        <p><strong>🚔 Police Hotline:</strong> (088) 521-9911</p>
+                        <p><strong>🚑 Medical Emergency:</strong> (088) 521-7777</p>
+                        <p><strong>🔥 Fire Department:</strong> (088) 521-5555</p>
+                        <p><strong>⛑️ Disaster Risk Reduction:</strong> (088) 521-3333</p>                        
+                        <h3 style="margin-top: 2rem;">👤 City Officials</h3>
+                        <p><strong>Mayor:</strong> Hon. Sabiniano "Ben" S. Canama</p>
+                        <p><strong>Vice Mayor:</strong> Hon. Jennifer S. Tan</p>
+                        <p><strong>Province:</strong> Misamis Occidental</p>
+                        <p><strong>District:</strong> 2nd Congressional District</p>
+                    </div>                  
+                    <div class="contact-form">
+                        <h3>📝 Send Us a Message</h3>
+                        <form onsubmit="sendMessage(event)">
+                            <input type="text" id="senderName" placeholder="Your Full Name" required>
+                            <input type="email" id="senderEmail" placeholder="Your Email Address" required>
+                            <input type="text" id="messageSubject" placeholder="Subject" required>
+                            <textarea id="messageContent" rows="5" placeholder="Your Message or Inquiry" required></textarea>
+                            <button type="submit">Send Message 📤</button>
+                        </form>
+                        <p id="contactResponse" style="margin-top: 1rem; font-weight: bold;"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="container">
+                <h3>🎄 City of Tangub - Christmas Symbols Capital of the Philippines 🎄</h3>
+                <p>Building a progressive, sustainable, and Christ-centered community</p>
+                <div class="social-links" style="margin: 2rem 0;">
+                    <span style="font-size: 1.2rem;">Follow Us: </span>
+                    <span style="margin: 0 10px; font-size: 1.5rem;">📘</span>
+                    <span style="margin: 0 10px; font-size: 1.5rem;">📷</span>
+                    <span style="margin: 0 10px; font-size: 1.5rem;">🐦</span>
+                    <span style="margin: 0 10px; font-size: 1.5rem;">📺</span>
+                </div>
+                <p>&copy; 2024 City of Tangub. All Rights Reserved.</p>
+                <p style="font-size: 0.9rem; margin-top: 1rem;">
+                    "Tangub City: Where Christmas Lives All Year Round" 🌟
+                </p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMsg = document.getElementById("errorMsg");
+
+            if (username === "Alinair" && password === "12345") {
+                const loginContainer = document.getElementById("loginSection");
+                loginContainer.style.animation = "fadeOut 0.8s ease-out forwards";
+                setTimeout(() => {
+                    loginContainer.classList.add("hidden");
+                    document.getElementById("websiteContent").classList.add("show");
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    showNotification("🎉 Welcome to Tangub City! Login successful!", "success");
+                }, 800);
+            } else {
+                errorMsg.textContent = "❌ Invalid username or password. Please try again.";
+                errorMsg.style.animation = "shake 0.5s ease-in-out";
+                setTimeout(() => {
+                    errorMsg.style.animation = "";
+                }, 500);
+            }
+        }
+        document.getElementById("showPassword").addEventListener("change", function () {
+            const passwordInput = document.getElementById("password");
+            passwordInput.type = this.checked ? "text" : "password";
+        });
+        document.addEventListener("keypress", function(event) {
+            if (event.key === "Enter" && !document.getElementById("loginSection").classList.contains("hidden")) {
+                login();
+            }
+        });
+        function sendMessage(event) {
+            event.preventDefault();
+            const name = document.getElementById("senderName").value;
+            const email = document.getElementById("senderEmail").value;
+            const subject = document.getElementById("messageSubject").value;
+            const message = document.getElementById("messageContent").value;
+            const response = document.getElementById("contactResponse");
+            response.innerHTML = "📤 Sending message...";
+            response.style.color = "#ffd700";
+            setTimeout(() => {
+                response.innerHTML = 
+                response.style.color = "#28a745";
+                document.querySelector(".contact-form form").reset();
+                showNotification("📧 Message sent successfully!", "success");
+            }, 2000);
+        }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.innerHTML = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'linear-gradient(45deg, #28a745, #20c997)' : 'linear-gradient(45deg, #dc3545, #fd7e14)'};
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                font-weight: bold;
+                z-index: 9999;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+                animation: slideInRight 0.5s ease-out;
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = "slideOutRight 0.5s ease-out forwards";
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = entry.target.dataset.animation || 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.barangay-card, .service-card, .news-card, .about-content');
+            animatedElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(50px)';
+                observer.observe(el);
+            });
+        });
+        function createSnowflakes() {
+            const snowflakeEmojis = ['❄️', '⭐', '✨', '🌟'];            
+            setInterval(() => {
+                if (!document.getElementById("loginSection").classList.contains("hidden")) return;
+                
+                const snowflake = document.createElement('div');
+                snowflake.innerHTML = snowflakeEmojis[Math.floor(Math.random() * snowflakeEmojis.length)];
+                snowflake.style.cssText = `
+                    position: fixed;
+                    top: -20px;
+                    left: ${Math.random() * 100}%;
+                    font-size: ${Math.random() * 20 + 10}px;
+                    z-index: 1;
+                    pointer-events: none;
+                    animation: snowfall ${Math.random() * 3 + 2}s linear forwards;
+                `;
+                
+                document.body.appendChild(snowflake);
+                
+                setTimeout(() => {
+                    if (document.body.contains(snowflake)) {
+                        document.body.removeChild(snowflake);
+                    }
+                }, 5000);
+            }, 3000);
+        }
+        setTimeout(createSnowflakes, 1000);     
+        const style = document.createElement('style');
+        style.textContent = fadeOutKeyframes;
+        document.head.appendChild(style);
+        window.addEventListener('load', () => {
+            console.log('🎄 Welcome to Tangub City - Christmas Symbols Capital of the Philippines! 🎄');
+        });
+    </script>
+</body>
+</html>
